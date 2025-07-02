@@ -127,13 +127,8 @@ button:hover {
 
 #reader {
   width: 100%;
-  max-width: 320px;
+  max-width: 100%;
   aspect-ratio: 4 / 3;
-  margin: 20px auto;
-  border: 3px solid #f4e733;
-  border-radius: 12px;
-  background: black;
-  overflow: hidden;
 }
 
 .container2 {
@@ -364,7 +359,7 @@ footer {
 
 const config = {
   fps: 15, // lower for better stability
-  qrbox: { width: 300, height: 300 }, // bigger scan area
+  qrbox: { width: 340, height: 340 }, // bigger scan area
   rememberLastUsedCamera: true,
   aspectRatio: 1.333, // 4:3 ratio is better for scanning
   supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
