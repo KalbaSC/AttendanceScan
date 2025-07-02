@@ -111,6 +111,53 @@
       border-radius: 10px;
       color: #f4e733;
     }
+.container2 {
+  max-width: 500px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 25px 20px;
+  border-radius: 16px;
+  border: 2px solid #f4e733;
+  text-align: center;
+}
+    .manual-entry {
+  margin-top: 30px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border-radius: 14px;
+  border: 2px solid #f4e733;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.manual-entry label {
+  display: block;
+  color: #f4e733;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.manual-entry input {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+.manual-entry button {
+  background-color: #f4e733;
+  color: black;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
 
     footer {
       background-color: #111;
@@ -159,19 +206,21 @@
   <button onclick="login()" style="width: 100%;">دخول</button>
   <div id="login-error" style="color: red; margin-top: 12px;"></div>
 </div>
-
+      
+<div class="container2">
       <div id="scanner-section">
         <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
         <button onclick="startScanner()">📷 بدء تشغيل الكاميرا</button>
         <div id="reader"></div>
         <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
-
-        <div style="margin-top: 25px; background: #000; padding: 15px 20px; border-radius: 12px;">
-          <label for="manualId">أدخل رقم الطفل (مثال: KalbaSC-17197482 أو الرقم فقط):</label>
-          <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482" style="width: 100%;">
-          <button onclick="submitManual()">تسجيل يدوي</button>
-        </div>
+        
+<div class="manual-entry">
+  <label for="manualId">أدخل رقم الطفل:</label>
+  <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482 أو الرقم فقط">
+  <button onclick="submitManual()">تسجيل يدوي</button>
+</div>
       </div>
+    </div>
     </main>
 
     <footer>
