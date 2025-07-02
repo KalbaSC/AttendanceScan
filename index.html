@@ -362,7 +362,6 @@ footer {
       setTimeout(() => startScanner(), 4000);
     }
 
-    const html5QrCode = new Html5Qrcode("reader");
 const config = {
   fps: 15, // lower for better stability
   qrbox: { width: 300, height: 300 }, // bigger scan area
@@ -380,26 +379,42 @@ const config = {
 };
 
     let scannerStarted = false;
-    function startScanner() {
-      if (scannerStarted) return;
-      Html5Qrcode.getCameras().then(devices => {
-        if (devices.length === 0) return alert("❌ لم يتم العثور على كاميرا.");
-        const backCamera = devices.find(device =>
-          device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("environment")) || devices[0];
+function startScanner() {
+  if (scannerStarted) return;
 
-        scannerStarted = true;
-        html5QrCode.start(
-          backCamera.id,
-          config,
-          msg => {
-            html5QrCode.stop();
-            scannerStarted = false;
-            markAttendance(msg);
-          },
-          err => {}
-        );
-      }).catch(() => alert("⚠️ لم يتم السماح بالوصول إلى الكاميرا."));
+  Html5Qrcode.getCameras().then(devices => {
+    if (devices.length === 0) {
+      alert("❌ لم يتم العثور على كاميرا.");
+      return;
     }
+
+    const backCamera = devices.find(device =>
+      device.label.toLowerCase().includes("back") ||
+      device.label.toLowerCase().includes("environment")
+    ) || devices[0];
+
+    const html5QrCode = new Html5Qrcode("reader"); 
+    scannerStarted = true;
+
+    html5QrCode.start(
+      backCamera.id,
+      config,
+      msg => {
+        html5QrCode.stop().then(() => {
+          scannerStarted = false;
+          markAttendance(msg);
+        }).catch(err => {
+          console.error("Stop error:", err);
+        });
+      },
+      err => {
+        // Optional: log scan errors
+      }
+    );
+  }).catch(() => {
+    alert("⚠️ تعذر تشغيل الكاميرا. تأكد من السماح بالوصول أو جرّب متصفحًا آخر.");
+  });
+}
 
     function submitManual() {
       const input = document.getElementById("manualId").value.trim();
