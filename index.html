@@ -75,6 +75,12 @@
       background: black;
       aspect-ratio: 1;
     }
+    #reader video {
+     width: 100% !important;
+     height: auto !important;
+     border-radius: 12px;
+     object-fit: cover;
+   }
     #status {
       margin-top: 15px;
       padding: 10px;
@@ -92,6 +98,7 @@
       border: 2px solid #f4e733;
       text-align: center;
       box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      box-sizing: border-box;
     }
     .manual-entry {
       margin-top: 25px;
@@ -163,7 +170,7 @@
     const html5QrCode = new Html5Qrcode("reader");
     const config = {
       fps: 30,
-      qrbox: { width: 250, height: 250 },
+      qrbox: { width: 220, height: 220 },
       rememberLastUsedCamera: true,
       aspectRatio: 1.0,
       supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
