@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مسح حضور الأطفال - نادي كلباء</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: black;
+      color: #f4e733;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background: #111;
+      padding: 15px;
+      text-align: center;
+      border-top: 3px solid #f4e733;
+      border-bottom: 3px solid #f4e733;
+    }
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+    #login-section, #scanner-section {
+      display: none;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 8px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background-color: #f4e733;
+      color: black;
+      cursor: pointer;
+    }
+    #reader {
+      width: 320px;
+      margin: 20px auto;
+      border: 3px solid #f4e733;
+      border-radius: 12px;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>نادي كلباء الرياضي الثقافي - تسجيل الحضور</h2>
+</header>
+
+<main>
+  <!-- Login Section -->
+  <div id="login-section">
+    <h3>تسجيل الدخول</h3>
+    <input type="text" id="username" placeholder="اسم المستخدم"><br>
+    <input type="password" id="password" placeholder="كلمة المرور"><br>
+    <button onclick="login()">دخول</button>
+    <div id="login-error" style="color: red; margin-top: 10px;"></div>
+  </div>
+
+  <!-- Scanner Section -->
+  <div id="scanner-section">
+    <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
+    <div id="reader"></div>
+    <div id="status" style="margin-top: 20px;"></div>
+  </div>
+</main>
+
+<footer>
+  © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
+</footer>
+
+<script>
+  // 1. Allowed users
+  const USERS = {
+    "rwnd": "rwnd123",
+    "eman": "eman123",
+    "heba": "heba123",
+    "moza": "moza123",
+    "extra": "extra123"
+  };
+
+  let loggedInUser = null;
+
+  // 2. Show login initially
+  document.getElementById("login-section").style.display = "block";
+
+  // 3. Login function
+  function login() {
+    const u = document.getElementById("username").value.trim().toLowerCase();
+    const p = document.getElementById("password").value.trim();
+
+    if (USERS[u] && USERS[u] === p) {
+      loggedInUser = u;
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("scanner-section").style.display = "block";
+      startScanner();
+    } else {
+      document.getElementById("login-error").innerText = "اسم المستخدم أو كلمة المرور غير صحيحة.";
+    }
+  }
+
+  // 4. Start QR scanner
+  function startScanner() {
+    const readerDiv = document.getElementById("reader");
+    const statusDiv = document.getElementById("status");
+
+    const scanner = new Html5Qrcode("reader");
+    scanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      qrCodeMessage => {
+        scanner.stop();
+        handleScan(qrCodeMessage);
+      },
+      error => {}
+    );
+
+    function handleScan(code) {
+      const parts = code.split('|');
+      const id = parts[0] || "UNKNOWN";
+      const encodedName = parts[1] || "UNKNOWN";
+      const encodedParent = parts[2] || "UNKNOWN";
+
+      const name = decodeURIComponent(encodedName);
+      const parent = decodeURIComponent(encodedParent);
+      const timestamp = new Date().toISOString();
+
+      statusDiv.innerHTML = `
+        ✅ تم تسجيل حضور:<br>
+        الاسم: ${name}<br>
+        ولي الأمر: ${parent}<br>
+        معرف: ${id}<br>
+        بواسطة: ${loggedInUser.toUpperCase()}
+      `;
+
+      // Send to Apps Script
+      const formData = new FormData();
+      formData.append("id", id);
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("timestamp", timestamp);
+      formData.append("staff", loggedInUser);
+
+      fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+
+      setTimeout(() => location.reload(), 4000);
+    }
+  }
+</script>
+
+</body>
+</html>
