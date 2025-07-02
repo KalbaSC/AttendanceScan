@@ -49,12 +49,12 @@
     }
 
     .logo {
-      height: 70px;
+      height: 40px;
     }
 
     .divider {
       width: 1.5px;
-      height: 65px;
+      height: 35px;
       background-color: #f4e733;
     }
 
@@ -64,11 +64,11 @@
 
     .arabic-name {
       font-weight: bold;
-      font-size: 20px;
+      font-size: 14px;
     }
 
     .english-name {
-      font-size: 14px;
+      font-size: 10px;
       color: #f4e733;
     }
 
@@ -118,13 +118,13 @@
       text-align: center;
       padding: 20px;
       border-top: 3px solid #f4e733;
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .social-icons a {
       color: white;
       margin: 0 8px;
-      font-size: 20px;
+      font-size: 11px;
     }
   </style>
 </head>
@@ -143,13 +143,14 @@
     </header>
 
     <main>
-      <div id="login-section">
-        <h3>تسجيل الدخول</h3>
-        <input type="text" id="username" placeholder="اسم المستخدم"><br>
-        <input type="password" id="password" placeholder="كلمة المرور"><br>
-        <button onclick="login()">دخول</button>
-        <div id="login-error" style="color: red; margin-top: 10px;"></div>
-      </div>
+      
+<div id="login-section" style="max-width: 400px; margin: 50px auto; background: rgba(0, 0, 0, 0.85); padding: 30px 20px; border-radius: 16px; border: 2px solid #f4e733;">
+  <h3 style="color: #f4e733; margin-bottom: 20px;">تسجيل الدخول</h3>
+  <input type="text" id="username" placeholder="اسم المستخدم" style="width: 100%;"><br>
+  <input type="password" id="password" placeholder="كلمة المرور" style="width: 100%;"><br>
+  <button onclick="login()" style="width: 100%;">دخول</button>
+  <div id="login-error" style="color: red; margin-top: 10px;"></div>
+</div>
 
       <div id="scanner-section">
         <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
