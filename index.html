@@ -9,231 +9,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/html5-qrcode"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Keep your entire <head> unchanged -->
-
-<!-- CHANGES START HERE -->
-<style>
-@font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic.ttf') format('truetype');
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
-  background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-.page-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.header-container {
-  width: 100%;
-  background: #111;
-  border-bottom: 3px solid #f4e733;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 16px;
-  background-color: #111;
-  color: white;
-  flex-wrap: wrap;
-}
-
-.logo {
-  height: 36px;
-}
-
-.divider {
-  width: 1.5px;
-  height: 30px;
-  background-color: #f4e733;
-}
-
-.header-info {
-  text-align: center;
-}
-
-.arabic-name {
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.english-name {
-  font-size: 10px;
-  color: #f4e733;
-}
-
-main {
-  flex: 1;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#login-section, #scanner-section {
-  width: 100%;
-  max-width: 400px;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 20px;
-  border-radius: 16px;
-  border: 2px solid #f4e733;
-  text-align: center;
-  margin: 0 auto;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1);
-}
-
-input, button {
-  padding: 10px;
-  font-size: 16px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: none;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #f4e733;
-  color: black;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  background-color: #ffe800;
-}
-
-#status {
-  margin-top: 20px;
-  padding: 12px;
-  background: black;
-  border-radius: 10px;
-  color: #f4e733;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-#reader {
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 4 / 3;
-}
-
-.container2 {
-  width: 100%;
-}
-
-.manual-entry {
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25px;
-  background: linear-gradient(to bottom right, #000000, #111111);
-  padding: 20px;
-  border-radius: 16px;
-  border: 2px solid #f4e733;
-  box-shadow: 0 0 12px rgba(244, 231, 51, 0.3);
-}
-.scanner-box button {
-  margin-bottom: 20px;
-}
-  
-.manual-entry label {
-  display: block;
-  color: #f4e733;
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.manual-entry input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  background-color: #fff;
-  color: #000;
-  margin-bottom: 12px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-}
-
-.manual-entry button {
-  font-size: 16px;
-  padding: 12px 0;
-  background-color: #f4e733;
-  color: black;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  width: 100%;
-  transition: 0.3s;
-}
-
-footer {
-  background-color: #111;
-  color: white;
-  text-align: center;
-  padding: 16px;
-  border-top: 3px solid #f4e733;
-  font-size: 12px;
-}
-
-.social-icons a {
-  color: white;
-  margin: 0 8px;
-  font-size: 14px;
-}
-
-@media (max-width: 480px) {
-  body {
-    overflow-x: hidden;
-  }
-
-  .container2 {
-    margin: 0 10px;
-    padding: 15px;
-  }
-  
-  .container2,
-.scanner-box {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding: 0 15px;
-  margin: 0 auto;
-}
-  
-  .manual-entry {
-    padding: 15px;
-  }
-
-  #login-section,
-  #scanner-section {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 25px 15px;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-}
-
-
-</style>
-
+  <style>
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .header-container {
+      background: #111;
+      border-bottom: 3px solid #f4e733;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      height: 36px;
+    }
+    .divider {
+      width: 1.5px;
+      height: 30px;
+      background-color: #f4e733;
+    }
+    .header-info {
+      text-align: center;
+    }
+    .arabic-name {
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .english-name {
+      font-size: 10px;
+      color: #f4e733;
+    }
+    main {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #reader {
+      width: 100%;
+      max-width: 360px;
+      border: 3px solid #f4e733;
+      border-radius: 16px;
+      overflow: hidden;
+      background: black;
+      aspect-ratio: 1;
+    }
+    #status {
+      margin-top: 15px;
+      padding: 10px;
+      background: black;
+      border-radius: 10px;
+      color: #f4e733;
+      font-size: 15px;
+    }
+    #scanner-section {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 20px;
+      border-radius: 16px;
+      border: 2px solid #f4e733;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    .manual-entry {
+      margin-top: 25px;
+    }
+    @keyframes pulse {
+      0% { border-color: rgba(244, 231, 51, 0.4); }
+      50% { border-color: rgba(244, 231, 51, 1); }
+      100% { border-color: rgba(244, 231, 51, 0.4); }
+    }
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      border-top: 3px solid #f4e733;
+      font-size: 12px;
+    }
+    .social-icons a {
+      color: white;
+      margin: 0 8px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
   <div class="page-wrapper">
@@ -250,69 +131,19 @@ footer {
     </header>
 
     <main>
-      
-<div id="login-section" style="
-  max-width: 400px;
-  margin: 60px auto;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 30px 20px;
-  border-radius: 16px;
-  border: 2px solid #f4e733;
-  text-align: center;
-">
-  <h3 style="color: #f4e733; margin-bottom: 20px;">تسجيل الدخول</h3>
-  <input type="text" id="username" placeholder="اسم المستخدم" style="width: 90%; margin-bottom: 10px;"><br>
-  <input type="password" id="password" placeholder="كلمة المرور" style="width: 90%; margin-bottom: 15px;"><br>
-  <button onclick="login()" style="width: 100%;">دخول</button>
-  <div id="login-error" style="color: red; margin-top: 12px;"></div>
-</div>
-      
-<div id="scanner-section" style="display: none;">
-  <div class="container2">
-    <div class="scanner-box">
-<h3 style="color: #f4e733;">وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
-
-      <div style="position: relative; margin: 0 auto; width: 100%; max-width: 360px;">
-  <div id="reader" style="
-    width: 100%;
-    aspect-ratio: 1;
-    border: 4px solid #f4e733;
-    border-radius: 16px;
-    overflow: hidden;
-    background: black;
-  "></div>
-
-  <!-- Nice scanning frame animation -->
-  <div style="
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    box-sizing: border-box;
-    border: 3px dashed rgba(255,255,255,0.4);
-    border-radius: 16px;
-    pointer-events: none;
-    animation: pulse 2s infinite ease-in-out;
-  "></div>
-</div>
-
-<style>
-@keyframes pulse {
-  0% { border-color: rgba(244, 231, 51, 0.4); }
-  50% { border-color: rgba(244, 231, 51, 1); }
-  100% { border-color: rgba(244, 231, 51, 0.4); }
-}
-</style>
-
-      <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
-      <div class="manual-entry">
-        <label for="manualId">أدخل رقم الطفل:</label>
-        <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482 أو الرقم فقط">
-        <button onclick="submitManual()">تسجيل يدوي</button>
+      <div id="scanner-section">
+        <h3 style="color: #f4e733;">وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
+        <div style="position: relative; margin: 0 auto;">
+          <div id="reader"></div>
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 3px dashed rgba(255,255,255,0.4); border-radius: 16px; animation: pulse 2s infinite ease-in-out; pointer-events: none;"></div>
+        </div>
+        <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
+        <div class="manual-entry">
+          <label for="manualId">أدخل رقم الطفل:</label>
+          <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482 أو الرقم فقط">
+          <button onclick="submitManual()">تسجيل يدوي</button>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-
     </main>
 
     <footer>
@@ -329,29 +160,39 @@ footer {
   </div>
 
   <script>
-    const USERS = {
-      "rwnd": "rwnd123",
-      "eman": "eman123",
-      "heba": "heba123",
-      "moza": "moza123",
-      "extra": "extra123"
+    const html5QrCode = new Html5Qrcode("reader");
+    const config = {
+      fps: 30,
+      qrbox: { width: 250, height: 250 },
+      rememberLastUsedCamera: true,
+      aspectRatio: 1.0,
+      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+      experimentalFeatures: { useBarCodeDetectorIfSupported: true }
     };
 
-    let loggedInUser = null;
-
-    document.getElementById("login-section").style.display = "block";
-
-    function login() {
-      const u = document.getElementById("username").value.trim().toLowerCase();
-      const p = document.getElementById("password").value.trim();
-      if (USERS[u] && USERS[u] === p) {
-        loggedInUser = u;
-        document.getElementById("login-section").style.display = "none";
-        document.getElementById("scanner-section").style.display = "block";
-        startScanner();
-      } else {
-        document.getElementById("login-error").innerText = "اسم المستخدم أو كلمة المرور غير صحيحة.";
-      }
+    let scannerStarted = false;
+    function startScanner() {
+      if (scannerStarted) return;
+      Html5Qrcode.getCameras().then(devices => {
+        if (devices.length === 0) {
+          alert("❌ لم يتم العثور على كاميرا.");
+          return;
+        }
+        let backCamera = devices.find(device =>
+          device.label.toLowerCase().includes('back') ||
+          device.label.toLowerCase().includes('environment')) || devices[0];
+        scannerStarted = true;
+        html5QrCode.start(
+          backCamera.id,
+          config,
+          msg => {
+            html5QrCode.stop();
+            scannerStarted = false;
+            markAttendance(msg);
+          },
+          err => {}
+        );
+      }).catch(() => alert("⚠️ تعذر تشغيل الكاميرا."));
     }
 
     function markAttendance(code) {
@@ -361,81 +202,19 @@ footer {
       const encodedParent = parts[2] || "UNKNOWN";
       const name = decodeURIComponent(encodedName);
       const parent = decodeURIComponent(encodedParent);
-      const timestamp = new Date().toISOString();
-
-      document.getElementById("status").innerHTML = `
-        ✅ تم تسجيل حضور:<br>
-        الاسم: ${name}<br>
-        ولي الأمر: ${parent}<br>
-        معرف: ${id}<br>
-        بواسطة: ${loggedInUser.toUpperCase()}`;
-
-      const data = new URLSearchParams();
+      document.getElementById("status").innerHTML = `✅ تم تسجيل الحضور<br>الاسم: ${name}<br>ولي الأمر: ${parent}`;
+      const data = new FormData();
       data.append("id", id);
       data.append("name", name);
       data.append("parent", parent);
-      data.append("timestamp", timestamp);
-      data.append("staff", loggedInUser);
-
+      data.append("date", new Date().toISOString());
       fetch("https://script.google.com/macros/s/AKfycbx5q8uqZle52sfH-dPuil6JV_rXJaIDBZlWBKkEdn93MZgGhrdPssui4JM2lj5jEGx7jQ/exec", {
         method: "POST",
         mode: "no-cors",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
         body: data
       });
-
       setTimeout(() => startScanner(), 4000);
     }
-
-const config = {
-  fps: 30, // Faster detection
-  qrbox: { width: 300, height: 300 }, // Optimal scan size
-  rememberLastUsedCamera: true,
-  supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-  videoConstraints: {
-    facingMode: "environment", // Use back camera
-    width: { ideal: 1920 },
-    height: { ideal: 1080 }
-  }
-};
-
-    let scannerStarted = false;
-function startScanner() {
-  if (scannerStarted) return;
-
-  Html5Qrcode.getCameras().then(devices => {
-    if (devices.length === 0) {
-      alert("❌ لم يتم العثور على كاميرا.");
-      return;
-    }
-
-    const backCamera = devices.find(device =>
-      device.label.toLowerCase().includes("back") ||
-      device.label.toLowerCase().includes("environment")
-    ) || devices[0];
-
-    const html5QrCode = new Html5Qrcode("reader"); 
-    scannerStarted = true;
-
-    html5QrCode.start(
-      backCamera.id,
-      config,
-      msg => {
-        html5QrCode.stop().then(() => {
-          scannerStarted = false;
-          markAttendance(msg);
-        }).catch(err => {
-          console.error("Stop error:", err);
-        });
-      },
-      err => {
-        // Optional: log scan errors
-      }
-    );
-  }).catch(() => {
-    alert("⚠️ تعذر تشغيل الكاميرا. تأكد من السماح بالوصول أو جرّب متصفحًا آخر.");
-  });
-}
 
     function submitManual() {
       const input = document.getElementById("manualId").value.trim();
@@ -443,7 +222,6 @@ function startScanner() {
       const match = input.match(/KalbaSC-(\d+)/) || input.match(/^(\d{6,})$/);
       if (!match) return alert("⚠️ يرجى إدخال الكود بالشكل الصحيح.");
       const idOnly = match[1];
-
       fetch(`https://script.google.com/macros/s/AKfycbzXwkw2AEELlxtMbMXLGq1sJhzlG6FlF7CtaZfQGSzNJd8UqAepgrMNjTgTNlGe_Nsb1Q/exec?id=${idOnly}`)
         .then(res => res.json())
         .then(data => {
@@ -453,6 +231,9 @@ function startScanner() {
         })
         .catch(() => alert("⚠️ تعذر الاتصال بالخادم."));
     }
+
+    // Auto start scanner on page load
+    window.onload = startScanner;
   </script>
 </body>
 </html>
