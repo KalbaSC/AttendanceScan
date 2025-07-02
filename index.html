@@ -15,24 +15,49 @@
       src: url('NotoKufiArabic.ttf') format('truetype');
     }
 
-html, body {
-      height: 100%;
+  html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+    }
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+    body {
       margin: 0;
       padding: 0;
       font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
       background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: white;
-      display: flex;
-      flex-direction: column;
     }
 
     .header-container {
+      width: 100%;
       background: #111;
       border-bottom: 3px solid #f4e733;
     }
-
     .header-right {
+      width: 100%;
       max-width: 1170px;
       margin: auto;
       display: flex;
@@ -40,32 +65,29 @@ html, body {
       justify-content: center;
       gap: 20px;
       padding: 20px 42px;
+      background-color: #111;
+      color: white;
+      box-sizing: border-box;
     }
-
-    .logo {
+    .header-right img.logo {
       height: 70px;
     }
-
     .divider {
       width: 1.5px;
       height: 65px;
       background-color: #f4e733;
     }
-
     .header-info {
       text-align: center;
     }
-
     .arabic-name {
       font-weight: bold;
       font-size: 20px;
     }
-
     .english-name {
       font-size: 14px;
       color: #f4e733;
     }
-
 
     main {
       flex: 1;
@@ -101,12 +123,13 @@ html, body {
       border-radius: 10px;
       color: #f4e733;
     }
-        footer {
+    footer {
       background-color: #111;
       color: white;
       text-align: center;
       padding: 20px;
       border-top: 3px solid #f4e733;
+      font-size: 14px;
     }
     .social-icons a {
       color: white;
