@@ -201,18 +201,31 @@ footer {
   font-size: 14px;
 }
 
-@media (max-width: 400px) {
-  .header-right {
-    flex-direction: column;
-    gap: 10px;
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
   }
 
-  .manual-entry,
+  .container2 {
+    margin: 0 10px;
+    padding: 15px;
+  }
+
+  .manual-entry {
+    padding: 15px;
+  }
+
   #login-section,
   #scanner-section {
-    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 }
+
 
 </style>
 
