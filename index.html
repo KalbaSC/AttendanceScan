@@ -246,16 +246,21 @@
     }
 
     const html5QrCode = new Html5Qrcode("reader");
-    const config = {
-      fps: 30,
-      qrbox: { width: 250, height: 250 },
-      rememberLastUsedCamera: true,
-      aspectRatio: 1.0,
-      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-      experimentalFeatures: {
-        useBarCodeDetectorIfSupported: true
-      }
-    };
+const config = {
+  fps: 15, // lower for better stability
+  qrbox: { width: 300, height: 300 }, // bigger scan area
+  rememberLastUsedCamera: true,
+  aspectRatio: 1.333, // 4:3 ratio is better for scanning
+  supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+  experimentalFeatures: {
+    useBarCodeDetectorIfSupported: true
+  },
+  videoConstraints: {
+    facingMode: "environment",
+    width: { ideal: 1920 },
+    height: { ideal: 1080 }
+  }
+};
 
     let scannerStarted = false;
     function startScanner() {
