@@ -9,200 +9,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/html5-qrcode"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    @font-face {
-      font-family: 'NotoKufiArabic';
-      src: url('NotoKufiArabic.ttf') format('truetype');
-    }
+  <!-- Keep your entire <head> unchanged -->
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
-      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
+<!-- CHANGES START HERE -->
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
+    background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .page-wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+  .page-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .header-container {
-      width: 100%;
-      background: #111;
-      border-bottom: 3px solid #f4e733;
-    }
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+    flex-direction: column;
+  }
 
-    .header-right {
-      max-width: 1170px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 17px;
-      padding: 18px 38px;
-      background-color: #111;
-      color: white;
-    }
+  #login-section,
+  #scanner-section {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 30px 25px;
+    border-radius: 16px;
+    border: 2px solid #f4e733;
+    text-align: center;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  }
 
-    .logo {
-      height: 40px;
-    }
+  #login-section h3,
+  #scanner-section h3 {
+    color: #f4e733;
+    margin-bottom: 20px;
+  }
 
-    .divider {
-      width: 1.5px;
-      height: 35px;
-      background-color: #f4e733;
-    }
+  #reader {
+    width: 100%;
+    max-width: 320px;
+    margin: 20px auto;
+    border: 3px solid #f4e733;
+    border-radius: 12px;
+    background: white;
+  }
 
-    .header-info {
-      text-align: center;
-    }
-
-    .arabic-name {
-      font-weight: bold;
-      font-size: 12px;
-    }
-
-    .english-name {
-      font-size: 10px;
-      color: #f4e733;
-    }
-
-    main {
-      flex: 1;
-      padding: 20px;
-      text-align: center;
-    }
-.scanner-box {
-  padding: 20px;
-}
-    #reader {
-      width: 320px;
-      border: 3px solid #f4e733;
-      border-radius: 12px;
-      background: white;
-      margin: 20px auto;
-    }
-
-    #login-section, #scanner-section {
-      display: none;
-    }
-
-    input, button {
-      padding: 10px;
-      font-size: 16px;
-      margin: 8px;
-      border-radius: 8px;
-      border: none;
-    }
-
-    button {
-      background-color: #f4e733;
-      color: black;
-      cursor: pointer;
-    }
-
-    #status {
-      margin-top: 20px;
-      padding: 10px 15px;
-      background: black;
-      border-radius: 10px;
-      color: #f4e733;
-    }
-    #reader {
-  width: 100%;
-  max-width: 320px;
-}
-
-.container2 {
-  max-width: 500px;
-  margin: 0 auto;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 25px 20px;
-  border-radius: 16px;
-  border: 2px solid #f4e733;
-  text-align: center;
-}
-.manual-entry {
-  margin-top: 30px;
-  background: linear-gradient(to bottom right, #000000, #111111);
-  padding: 20px 15px;
-  border-radius: 16px;
-  border: 2px solid #f4e733;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 12px rgba(244, 231, 51, 0.3);
-}
-
-.manual-entry label {
-  display: block;
-  color: #f4e733;
-  margin-bottom: 12px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.manual-entry input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  background-color: #fff;
-  color: #000;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-  margin-bottom: 15px;
-}
-
-.manual-entry button {
-  background-color: #f4e733;
-  color: #000;
-  font-size: 16px;
-  padding: 12px 20px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.manual-entry button:hover {
-  background-color: #ffe800;
-}
-
-    footer {
-      background-color: #111;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      border-top: 3px solid #f4e733;
-      font-size: 12px;
-    }
-
-    .social-icons a {
-      color: white;
-      margin: 0 8px;
-      font-size: 11px;
-    }
-
-    @media (max-width: 480px) {
-  .container2 {
-    margin: 0 10px;
-    padding: 15px;
+  .scanner-box {
+    padding: 0;
   }
 
   .manual-entry {
-    padding: 15px;
+    margin-top: 30px;
+    padding: 20px 15px;
+    background: linear-gradient(to bottom right, #000000, #111111);
+    border-radius: 16px;
+    border: 2px solid #f4e733;
+    box-shadow: 0 0 12px rgba(244, 231, 51, 0.3);
   }
-}
 
-  </style>
+  .manual-entry label {
+    display: block;
+    color: #f4e733;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .manual-entry input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
+  }
+
+  .manual-entry button,
+  button {
+    background-color: #f4e733;
+    color: #000;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .manual-entry button:hover,
+  button:hover {
+    background-color: #ffe800;
+  }
+
+  #status {
+    margin-top: 20px;
+    padding: 12px;
+    background: black;
+    border-radius: 10px;
+    color: #f4e733;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 480px) {
+    #login-section,
+    #scanner-section {
+      padding: 20px 15px;
+    }
+
+    #reader {
+      width: 100%;
+    }
+
+    .manual-entry {
+      padding: 15px;
+    }
+  }
+</style>
+<!-- CHANGES END HERE -->
+
 </head>
 <body>
   <div class="page-wrapper">
