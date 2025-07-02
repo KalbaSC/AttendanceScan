@@ -77,7 +77,9 @@
       padding: 20px;
       text-align: center;
     }
-
+.scanner-box {
+  padding: 20px;
+}
     #reader {
       width: 320px;
       border: 3px solid #f4e733;
@@ -236,15 +238,16 @@
       
 <div id="scanner-section" style="display: none;">
   <div class="container2">
-    <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
-    <button onclick="startScanner()">📷 بدء تشغيل الكاميرا</button>
-    <div id="reader"></div>
-    <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
-    
-    <div class="manual-entry">
-      <label for="manualId">أدخل رقم الطفل:</label>
-      <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482 أو الرقم فقط">
-      <button onclick="submitManual()">تسجيل يدوي</button>
+    <div class="scanner-box">
+      <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
+      <button onclick="startScanner()">📷 بدء تشغيل الكاميرا</button>
+      <div id="reader"></div>
+      <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
+      <div class="manual-entry">
+        <label for="manualId">أدخل رقم الطفل:</label>
+        <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482 أو الرقم فقط">
+        <button onclick="submitManual()">تسجيل يدوي</button>
+      </div>
     </div>
   </div>
 </div>
