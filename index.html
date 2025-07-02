@@ -128,11 +128,12 @@ button:hover {
 #reader {
   width: 100%;
   max-width: 320px;
-  height: auto;
+  aspect-ratio: 4 / 3;
   margin: 20px auto;
   border: 3px solid #f4e733;
   border-radius: 12px;
-  background: white;
+  background: black;
+  overflow: hidden;
 }
 
 .container2 {
@@ -274,8 +275,8 @@ footer {
 <div id="scanner-section" style="display: none;">
   <div class="container2">
     <div class="scanner-box">
-      <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
-      <button onclick="startScanner()">📷 بدء تشغيل الكاميرا</button>
+<h3 style="color: #f4e733;">وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
+
       <div id="reader"></div>
       <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
       <div class="manual-entry">
@@ -322,6 +323,7 @@ footer {
         loggedInUser = u;
         document.getElementById("login-section").style.display = "none";
         document.getElementById("scanner-section").style.display = "block";
+        startScanner();
       } else {
         document.getElementById("login-error").innerText = "اسم المستخدم أو كلمة المرور غير صحيحة.";
       }
