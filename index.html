@@ -1,4 +1,4 @@
-<!DOCTYPE html>More actions
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -42,7 +42,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-
       gap: 17px;
       padding: 18px 38px;
       background-color: #111;
@@ -79,6 +78,18 @@
       text-align: center;
     }
 
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+    
     #reader {
       width: 320px;
       border: 3px solid #f4e733;
@@ -97,9 +108,15 @@
       margin: 8px;
       border-radius: 8px;
       border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     button {
+      display: flex;
+      align-items: center;
+      width: 100%;
       background-color: #f4e733;
       color: black;
       cursor: pointer;
@@ -127,6 +144,83 @@
       margin: 0 8px;
       font-size: 11px;
     }
+    
+        @media (max-width: 768px) {
+ .header-right {
+    padding: 10px 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-info {
+    display: block;
+    text-align: center;
+  }
+
+  .header-info .arabic-name {
+    font-size: 16px;
+  }
+
+  .header-info .english-name {
+    font-size: 12px;
+  }
+
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+    background-color: #f4e733;
+  }
+
+  img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+  .container {
+    padding: 12px;
+    margin: 10px auto;
+    width: 95%;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 17px;
+    line-height: 1.4;
+  }
+
+      .search-group {
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+}
+  button{
+    width: 80%;
+    font-size: 12px;
+    align-items: center;
+    padding: 10px;
+  }
+          
+  footer {
+  text-align: center;
+  padding: 15px 10px;
+}
+
+footer p {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+  .social-icons a {
+    font-size: 18px;
+  }
+}
   </style>
 </head>
 <body>
@@ -160,6 +254,8 @@
   <button onclick="login()" style="width: 100%;">دخول</button>
   <div id="login-error" style="color: red; margin-top: 12px;"></div>
 </div>
+      
+<div class="container" id="mainView">
 
       <div id="scanner-section">
         <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
@@ -173,6 +269,8 @@
           <button onclick="submitManual()">تسجيل يدوي</button>
         </div>
       </div>
+        </div>
+
     </main>
 
     <footer>
