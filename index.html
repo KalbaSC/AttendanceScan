@@ -305,115 +305,137 @@ footer p {
     </footer>
   </div>
 
-  <script>
-    const USERS = {
-      "rwnd": "rwnd123",
-      "eman": "eman123",
-      "heba": "heba123",
-      "moza": "moza123",
-      "extra": "extra123"
-    };
+<script>
+  const USERS = {
+    "rwnd": "rwnd123",
+    "eman": "eman123",
+    "heba": "heba123",
+    "moza": "moza123",
+    "extra": "extra123"
+  };
 
-    let loggedInUser = null;
+  let loggedInUser = null;
 
-    document.getElementById("login-section").style.display = "block";
+  document.getElementById("login-section").style.display = "block";
 
-    function login() {
-      const u = document.getElementById("username").value.trim().toLowerCase();
-      const p = document.getElementById("password").value.trim();
-      if (USERS[u] && USERS[u] === p) {
-        loggedInUser = u;
-        document.getElementById("login-section").style.display = "none";
-        document.getElementById("scanner-section").style.display = "block";
-        startScanner();
-      } else {
-        document.getElementById("login-error").innerText = "اسم المستخدم أو كلمة المرور غير صحيحة.";
-      }
+  function login() {
+    const u = document.getElementById("username").value.trim().toLowerCase();
+    const p = document.getElementById("password").value.trim();
+    if (USERS[u] && USERS[u] === p) {
+      loggedInUser = u;
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("scanner-section").style.display = "block";
+      setTimeout(() => startScanner(), 500); // تشغيل تلقائي بعد تسجيل الدخول
+    } else {
+      document.getElementById("login-error").innerText = "اسم المستخدم أو كلمة المرور غير صحيحة.";
     }
-
-    function markAttendance(code) {
-      const parts = code.split('|');
-      const id = parts[0] || "UNKNOWN";
-      const encodedName = parts[1] || "UNKNOWN";
-      const encodedParent = parts[2] || "UNKNOWN";
-      const name = decodeURIComponent(encodedName);
-      const parent = decodeURIComponent(encodedParent);
-      const timestamp = new Date().toISOString();
-
-      document.getElementById("status").innerHTML = `
-        ✅ تم تسجيل حضور:<br>
-        الاسم: ${name}<br>
-        ولي الأمر: ${parent}<br>
-        معرف: ${id}<br>
-        بواسطة: ${loggedInUser.toUpperCase()}`;
-
-      const data = new URLSearchParams();
-      data.append("id", id);
-      data.append("name", name);
-      data.append("parent", parent);
-      data.append("timestamp", timestamp);
-      data.append("staff", loggedInUser);
-
-      fetch("https://script.google.com/macros/s/AKfycbx5q8uqZle52sfH-dPuil6JV_rXJaIDBZlWBKkEdn93MZgGhrdPssui4JM2lj5jEGx7jQ/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: data
-      });
-
-      setTimeout(() => startScanner(), 4000);
-    }
-
-    const html5QrCode = new Html5Qrcode("reader");
-const config = {
-  fps: 15, 
-  qrbox: 300,
-  disableFlip: true, 
-  rememberLastUsedCamera: true,
-  supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-  experimentalFeatures: {
-    useBarCodeDetectorIfSupported: true
   }
-};
 
-    let scannerStarted = false;
-    function startScanner() {
-      if (scannerStarted) return;
-      Html5Qrcode.getCameras().then(devices => {
-        if (devices.length === 0) return alert("❌ لم يتم العثور على كاميرا.");
-        const backCamera = devices.find(device =>
-          device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("environment")) || devices[0];
+  function markAttendance(code) {
+    const parts = code.split('|');
+    const id = parts[0] || "UNKNOWN";
+    const encodedName = parts[1] || "UNKNOWN";
+    const encodedParent = parts[2] || "UNKNOWN";
+    const name = decodeURIComponent(encodedName);
+    const parent = decodeURIComponent(encodedParent);
+    const timestamp = new Date().toISOString();
 
-        scannerStarted = true;
-        html5QrCode.start(
-          backCamera.id,
-          config,
-          msg => {
-            html5QrCode.stop();
-            scannerStarted = false;
-            markAttendance(msg);
-          },
-          err => {}
-        );
-      }).catch(() => alert("⚠️ لم يتم السماح بالوصول إلى الكاميرا."));
+    document.getElementById("status").innerHTML = `
+      ✅ تم تسجيل حضور:<br>
+      الاسم: ${name}<br>
+      ولي الأمر: ${parent}<br>
+      معرف: ${id}<br>
+      بواسطة: ${loggedInUser.toUpperCase()}`;
+
+    const data = new URLSearchParams();
+    data.append("id", id);
+    data.append("name", name);
+    data.append("parent", parent);
+    data.append("timestamp", timestamp);
+    data.append("staff", loggedInUser);
+
+    fetch("https://script.google.com/macros/s/AKfycbx5q8uqZle52sfH-dPuil6JV_rXJaIDBZlWBKkEdn93MZgGhrdPssui4JM2lj5jEGx7jQ/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: data
+    });
+
+    setTimeout(() => startScanner(), 4000);
+  }
+
+  const html5QrCode = new Html5Qrcode("reader");
+
+  const config = {
+    fps: 15,
+    qrbox: { width: 320, height: 320 },
+    disableFlip: true,
+    rememberLastUsedCamera: true,
+    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+    experimentalFeatures: {
+      useBarCodeDetectorIfSupported: true
     }
+  };
 
-    function submitManual() {
-      const input = document.getElementById("manualId").value.trim();
-      if (!input) return alert("يرجى إدخال كود الطفل أو الرقم.");
-      const match = input.match(/KalbaSC-(\d+)/) || input.match(/^(\d{6,})$/);
-      if (!match) return alert("⚠️ يرجى إدخال الكود بالشكل الصحيح.");
-      const idOnly = match[1];
+  let scannerStarted = false;
 
-      fetch(`https://script.google.com/macros/s/AKfycbzXwkw2AEELlxtMbMXLGq1sJhzlG6FlF7CtaZfQGSzNJd8UqAepgrMNjTgTNlGe_Nsb1Q/exec?id=${idOnly}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.error) return alert("❌ لم يتم العثور على هذا الرقم.");
-          const qr = `KalbaSC-${idOnly}|${encodeURIComponent(data.name)}|${encodeURIComponent(data.parent)}`;
-          markAttendance(qr);
-        })
-        .catch(() => alert("⚠️ تعذر الاتصال بالخادم."));
-    }
-  </script>
+  function startScanner() {
+    if (scannerStarted) return;
+    Html5Qrcode.getCameras().then(devices => {
+      if (devices.length === 0) return alert("❌ لم يتم العثور على كاميرا.");
+      const backCamera = devices.find(device =>
+        device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("environment")) || devices[0];
+
+      scannerStarted = true;
+
+      html5QrCode.start(
+        { deviceId: { exact: backCamera.id }, facingMode: "environment" },
+        {
+          ...config,
+          videoConstraints: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            facingMode: "environment"
+          }
+        },
+        msg => {
+          html5QrCode.stop();
+          scannerStarted = false;
+          markAttendance(msg);
+        },
+        err => {
+          console.warn("QR Scan Error:", err);
+        }
+      );
+
+      // إعادة محاولة إذا ما اشتغلت بعد 7 ثواني
+      setTimeout(() => {
+        if (!scannerStarted) {
+          console.log("إعادة تشغيل الماسح...");
+          startScanner();
+        }
+      }, 7000);
+
+    }).catch(() => alert("⚠️ لم يتم السماح بالوصول إلى الكاميرا."));
+  }
+
+  function submitManual() {
+    const input = document.getElementById("manualId").value.trim();
+    if (!input) return alert("يرجى إدخال كود الطفل أو الرقم.");
+    const match = input.match(/KalbaSC-(\d+)/) || input.match(/^(\d{6,})$/);
+    if (!match) return alert("⚠️ يرجى إدخال الكود بالشكل الصحيح.");
+    const idOnly = match[1];
+
+    fetch(`https://script.google.com/macros/s/AKfycbzXwkw2AEELlxtMbMXLGq1sJhzlG6FlF7CtaZfQGSzNJd8UqAepgrMNjTgTNlGe_Nsb1Q/exec?id=${idOnly}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) return alert("❌ لم يتم العثور على هذا الرقم.");
+        const qr = `KalbaSC-${idOnly}|${encodeURIComponent(data.name)}|${encodeURIComponent(data.parent)}`;
+        markAttendance(qr);
+      })
+      .catch(() => alert("⚠️ تعذر الاتصال بالخادم."));
+  }
+</script>
+
 </body>
 </html>
