@@ -381,12 +381,11 @@ footer p {
       Html5Qrcode.getCameras().then(devices => {
         if (devices.length === 0) return alert("❌ لم يتم العثور على كاميرا.");
       const frontCamera = devices.find(device =>
-      device.label.toLowerCase().includes("front") || device.label.toLowerCase().includes("user")) || devices[0];
-
+     device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("environment")   ) || devices[0];
 
         scannerStarted = true;
         html5QrCode.start(
-         frontCamera.id,
+        { deviceId: { exact: backCamera.id } },       
           config,
           msg => {
             html5QrCode.stop();
