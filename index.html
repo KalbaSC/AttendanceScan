@@ -364,16 +364,16 @@ footer p {
     }
 
     const html5QrCode = new Html5Qrcode("reader");
-    const config = {
-      fps: 30,
-      qrbox: { width: 250, height: 250 },
-      rememberLastUsedCamera: true,
-      aspectRatio: 1.0,
-      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-      experimentalFeatures: {
-        useBarCodeDetectorIfSupported: true
-      }
-    };
+const config = {
+  fps: 10,
+  qrbox: { width: 320, height: 320 },
+  aspectRatio: 1.3333,
+  rememberLastUsedCamera: true,
+  supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+  experimentalFeatures: {
+    useBarCodeDetectorIfSupported: true
+  }
+};
 
     let scannerStarted = false;
     function startScanner() {
