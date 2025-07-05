@@ -372,6 +372,12 @@ const config = {
   supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
   experimentalFeatures: {
     useBarCodeDetectorIfSupported: true
+  },
+    videoConstraints: {
+    width: { ideal: 1280 },
+    height: { ideal: 720 },
+    facingMode: "environment",
+    advanced: [{ focusMode: "continuous" }] 
   }
 };
 
