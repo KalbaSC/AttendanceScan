@@ -380,12 +380,12 @@ footer p {
       if (scannerStarted) return;
       Html5Qrcode.getCameras().then(devices => {
         if (devices.length === 0) return alert("❌ لم يتم العثور على كاميرا.");
-      const backCamera = devices.find(device =>
-     device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("environment")   ) || devices[0];
+        const backCamera = devices.find(device =>
+          device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("environment")) || devices[0];
 
         scannerStarted = true;
         html5QrCode.start(
-        { deviceId: { exact: backCamera.id } },       
+          backCamera.id,
           config,
           msg => {
             html5QrCode.stop();
@@ -416,3 +416,4 @@ footer p {
   </script>
 </body>
 </html>
+how do i force it to open front cam
