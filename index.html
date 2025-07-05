@@ -325,6 +325,7 @@ footer p {
         loggedInUser = u;
         document.getElementById("login-section").style.display = "none";
         document.getElementById("scanner-section").style.display = "block";
+        startScanner();
       } else {
         document.getElementById("login-error").innerText = "اسم المستخدم أو كلمة المرور غير صحيحة.";
       }
@@ -365,9 +366,9 @@ footer p {
 
     const html5QrCode = new Html5Qrcode("reader");
 const config = {
-  fps: 30,
-  qrbox: { width: 250, height: 250 },
-  aspectRatio: 1.0,
+  fps: 15, 
+  qrbox: 300,
+  disableFlip: true, 
   rememberLastUsedCamera: true,
   supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
   experimentalFeatures: {
