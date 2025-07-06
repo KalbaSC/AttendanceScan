@@ -282,13 +282,17 @@ footer p {
         <div id="reader"></div>
         <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
         
-<div style="margin-top: 25px; background: #000; padding: 15px 20px; border-radius: 12px;">
-  <label for="activity">اختر نوع النشاط:</label>
-  <select id="activity" style="width: 100%; padding: 10px; border-radius: 8px; margin-top: 10px;">
-    <option value="أنشطة رياضية">أنشطة رياضية</option>
-    <option value="أنشطة ثقافية">أنشطة ثقافية</option>
-  </select>
-</div>
+<label for="activity">اختر النشاط (اختياري):</label>
+<select id="activity" style="width: 100%; padding: 10px; border-radius: 8px; margin-top: 10px;">
+  <option value="عام">📋 الحضور العام</option>
+  <option value="ورش">ورش</option>
+  <option value="زيارات خارجية">زيارات خارجية</option>
+  <option value="شطرنج">شطرنج</option>
+  <option value="كرة قدم">كرة قدم</option>
+  <option value="كرة سلة">كرة سلة</option>
+  <option value="كرة طائرة">كرة طائرة</option>
+</select>
+        
         <div style="margin-top: 25px; background: #000; padding: 15px 20px; border-radius: 12px;">
           <label for="manualId">أدخل رقم الطفل (مثال: KalbaSC-17197482 أو الرقم فقط):</label>
           <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482" style="width: 100%;">
@@ -345,8 +349,8 @@ footer p {
       const name = decodeURIComponent(encodedName);
       const parent = decodeURIComponent(encodedParent);
       const timestamp = new Date().toISOString();
-      const activity = document.getElementById("activity").value || "غير محدد";
-
+      const activity = document.getElementById("activity").value.trim();
+      
       document.getElementById("status").innerHTML = `
         ✅ تم تسجيل حضور:<br>
         الاسم: ${name}<br>
@@ -363,7 +367,7 @@ footer p {
       data.append("staff", loggedInUser);
       data.append("activity", activity); 
       // https://script.google.com/macros/s/AKfycbx5q8uqZle52sfH-dPuil6JV_rXJaIDBZlWBKkEdn93MZgGhrdPssui4JM2lj5jEGx7jQ/exec
-      
+      //https://script.google.com/macros/s/AKfycbxij6xIH_fypPRhklqQKURq-7xB5RJ3sC5dCBfwj4sJBjqnfXde1ncFrhCpDy04zuZW6g/exec
       fetch("https://script.google.com/macros/s/AKfycbxij6xIH_fypPRhklqQKURq-7xB5RJ3sC5dCBfwj4sJBjqnfXde1ncFrhCpDy04zuZW6g/exec", {
         method: "POST",
         mode: "no-cors",
