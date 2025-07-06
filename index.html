@@ -281,7 +281,14 @@ footer p {
         <button onclick="startScanner()">📷 بدء تشغيل الكاميرا</button>
         <div id="reader"></div>
         <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
-
+        
+<div style="margin-top: 25px; background: #000; padding: 15px 20px; border-radius: 12px;">
+  <label for="activity">اختر نوع النشاط:</label>
+  <select id="activity" style="width: 100%; padding: 10px; border-radius: 8px; margin-top: 10px;">
+    <option value="أنشطة رياضية">أنشطة رياضية</option>
+    <option value="أنشطة ثقافية">أنشطة ثقافية</option>
+  </select>
+</div>
         <div style="margin-top: 25px; background: #000; padding: 15px 20px; border-radius: 12px;">
           <label for="manualId">أدخل رقم الطفل (مثال: KalbaSC-17197482 أو الرقم فقط):</label>
           <input type="text" id="manualId" placeholder="مثال: KalbaSC-17197482" style="width: 100%;">
@@ -338,12 +345,14 @@ footer p {
       const name = decodeURIComponent(encodedName);
       const parent = decodeURIComponent(encodedParent);
       const timestamp = new Date().toISOString();
+      const activity = document.getElementById("activity").value || "غير محدد";
 
       document.getElementById("status").innerHTML = `
         ✅ تم تسجيل حضور:<br>
         الاسم: ${name}<br>
         ولي الأمر: ${parent}<br>
         معرف: ${id}<br>
+        النشاط: ${activity}<br>
         بواسطة: ${loggedInUser.toUpperCase()}`;
 
       const data = new URLSearchParams();
@@ -352,6 +361,7 @@ footer p {
       data.append("parent", parent);
       data.append("timestamp", timestamp);
       data.append("staff", loggedInUser);
+      data.append("activity", activity); 
 
       fetch("https://script.google.com/macros/s/AKfycbx5q8uqZle52sfH-dPuil6JV_rXJaIDBZlWBKkEdn93MZgGhrdPssui4JM2lj5jEGx7jQ/exec", {
         method: "POST",
