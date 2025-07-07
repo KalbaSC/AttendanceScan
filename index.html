@@ -424,7 +424,7 @@ const config = {
       if (!match) return alert("⚠️ يرجى إدخال الكود بالشكل الصحيح.");
       const idOnly = match[1];
 
-      fetch(`https://script.google.com/macros/s/AKfycbzXwkw2AEELlxtMbMXLGq1sJhzlG6FlF7CtaZfQGSzNJd8UqAepgrMNjTgTNlGe_Nsb1Q/exec?id=${idOnly}`)
+      fetch(`https://script.google.com/macros/s/AKfycbysWX_UMRpmi_wv316IUcihXjjDVE-bTNsXagOWCDF2EjM33VaFP5Ru9YZkhcdcyFhIZQ/exec?id=${idOnly}`)
         .then(res => res.json())
         .then(data => {
           if (data.error) return alert("❌ لم يتم العثور على هذا الرقم.");
